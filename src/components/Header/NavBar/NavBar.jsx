@@ -13,7 +13,7 @@ const pages = [
   { label: "Contact", to: "/contact" },
 ];
 
-const CustomNavbar = () => {
+const NavBar = () => {
   const { user } = useAuth();
 
   return (
@@ -62,4 +62,4 @@ const CustomNavbar = () => {
   );
 };
 
-export default CustomNavbar;
+export default NavBar;
