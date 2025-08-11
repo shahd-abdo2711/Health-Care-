@@ -1,19 +1,31 @@
- 
 import React from "react";
 import useAuth from "../../../../Hooks/useAuth";
-import { Card, Row, Col, Image } from "react-bootstrap";
- 
+import { Card, Row, Col, Image, Button } from "react-bootstrap";
+
 const UserProfile = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
+  // تحقق بسيط لو user مش موجود (بعد تسجيل الخروج)
+  if (!user) {
+    return <p>Please login first.</p>;
+  }
 
   return (
     <Card className="shadow p-4 mx-auto my-5" style={{ maxWidth: "600px" }}>
       <Row className="align-items-center">
         <Col md={8} xs={12}>
           <h5 className="mb-3">
-            Welcome to our Hospital, {user.displayName}
+            Welcome to our Hospital, {user.displayName || "User"}
           </h5>
           <p className="text-muted mb-0">{user.email}</p>
+
+          <Button variant="danger" className="mt-3" onClick={handleLogout}>
+            Logout
+          </Button>
         </Col>
         <Col
           md={4}
@@ -21,8 +33,8 @@ const UserProfile = () => {
           className="d-flex justify-content-center mt-3 mt-md-0"
         >
           <Image
-            src={user.photoURL}
-            alt={user.displayName}
+            src={user.photoURL || "/default-profile.png"} // صورة افتراضية لو مفيش photoURL
+            alt={user.displayName || "User"}
             roundedCircle
             style={{
               border: "2px solid #f48fb1",

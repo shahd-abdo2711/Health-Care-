@@ -56,7 +56,7 @@ const NavBar = ({ darkMode, toggleDarkMode }) => {
             {user?.email ? (
               <Nav.Link
                 as={Link}
-                to="/profile"
+                to="/UserProfile"
                 title="User Profile"
                 className={darkMode ? "text-light" : "text-dark"}
               >

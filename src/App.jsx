@@ -16,6 +16,7 @@ import Appointment from "./components/Services/Appointment/Appointment";
 import ServiceDetails from "./components/Services/ServiceDetails/ServiceDetails";
 import PrivateRoute from "./PrivetRoute/PrivetRoute";
 import Contact from "./components/Contact/Contact";
+import UserProfile from "./components/Login/Login/UserProfile/UserProfile"
 
 import React, { useState, useEffect } from "react";
 
@@ -59,7 +60,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About darkMode={darkMode} />} />
-            <Route path="/profile" element={<Login />} />
+            <Route path="/UserProfile" element={<UserProfile />} />
             <Route path="/contact" element={<Contact darkMode={darkMode} />} />
 
             <Route

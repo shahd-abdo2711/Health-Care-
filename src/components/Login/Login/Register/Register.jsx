@@ -56,6 +56,16 @@ const Register = () => {
     handleRegister(e);
   };
 
+  const handleGoogleSignIn = () => {
+    singInUsingGoogle()
+      .then((result) => {
+        console.log("Google sign in success:", result.user);
+      })
+      .catch((error) => {
+        console.error("Google sign in error:", error.message);
+      });
+  };
+
   return (
     <Container className="mt-5 mb-5">
       {user?.email ? (
@@ -157,7 +167,7 @@ const Register = () => {
               </div>
 
               <div className="Login-btns mt-3">
-                <GoogleButton type="dark" onClick={singInUsingGoogle} />
+                <GoogleButton type="dark" onClick={handleGoogleSignIn} />
               </div>
 
               <div className="Login-btns mt-3">
