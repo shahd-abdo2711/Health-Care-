@@ -9,7 +9,7 @@ import {
   FaGithub,
   FaHospitalSymbol
 } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { HashLink as Link } from 'react-router-hash-link';  
 import "./Footer.css";
 
 function Footer() {
@@ -70,13 +70,13 @@ function Footer() {
           <Col md={4} className="mb-3">
             <h6 className="text-center mb-3">Our Services</h6>
             <div className="d-flex flex-column align-items-center">
-              <Link to="/doctors#doctors" className="text-light mb-2">
+              <Link to="/doctors#doctors" className="text-light mb-2" smooth>
                 Find a Doctor
               </Link>
-              <Link to="/services#services" className="text-light mb-2">
+              <Link to="/services#services" className="text-light mb-2" smooth>
                 All Services
               </Link>
-              <Link to="/appointment#appointment" className="text-light mb-2">
+              <Link to="/appointment#appointment" className="text-light mb-2" smooth>
                 Make An Appointment
               </Link>
               <Link to="/register" className="text-light mb-2">

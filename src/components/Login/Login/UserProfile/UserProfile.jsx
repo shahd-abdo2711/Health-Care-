@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useAuth from "../../../../Hooks/useAuth";
-import { Card, Row, Col, Image, Button } from "react-bootstrap";
-
+import { Card, Row, Col, Image, Button, ListGroup, Spinner } from "react-bootstrap";
+import { collection, query, where, getDocs } from "firebase/firestore";
+import { db } from "../../Firebase/Firebase.init";  
 const UserProfile = () => {
   const { user, logout } = useAuth();
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const handleLogout = () => {
     logout();
   };
 
-  // تحقق بسيط لو user مش موجود (بعد تسجيل الخروج)
+  useEffect(() => {
+    const fetchAppointments = async () => {
+      if (!user) {
+        setAppointments([]);
+        setLoading(false);
+        return;
+      }
+      setLoading(true);
+      try {
+        const q = query(collection(db, "appointments"), where("userId", "==", user.uid));
+        const querySnapshot = await getDocs(q);
+        const userAppointments = querySnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setAppointments(userAppointments);
+      } catch (error) {
+        console.error("Error fetching appointments:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAppointments();
+  }, [user]);
+
   if (!user) {
-    return <p>Please login first.</p>;
+    return <p className="text-center mt-5">Please login first.</p>;
   }
 
   return (
@@ -33,7 +61,7 @@ const UserProfile = () => {
           className="d-flex justify-content-center mt-3 mt-md-0"
         >
           <Image
-            src={user.photoURL || "/default-profile.png"} // صورة افتراضية لو مفيش photoURL
+            src={user.photoURL || "/default-profile.png"}  
             alt={user.displayName || "User"}
             roundedCircle
             style={{
@@ -47,6 +75,28 @@ const UserProfile = () => {
           />
         </Col>
       </Row>
+
+      <hr />
+
+      <h5 className="mt-4 mb-3">Your Appointments</h5>
+
+      {loading ? (
+        <div className="text-center">
+          <Spinner animation="border" variant="primary" />
+        </div>
+      ) : appointments.length === 0 ? (
+        <p>No appointments found.</p>
+      ) : (
+        <ListGroup>
+          {appointments.map((appt) => (
+            <ListGroup.Item key={appt.id}>
+              <strong>Doctor ID:</strong> {appt.doctorId} <br />
+              <strong>Date:</strong> {new Date(appt.appointmentDate).toLocaleString()} <br />
+              <strong>Problem:</strong> {appt.problemType}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      )}
     </Card>
   );
 };

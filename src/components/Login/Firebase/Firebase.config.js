@@ -1,4 +1,4 @@
-// Firebase.config.js
+ 
 const firebaseConfig = {
   apiKey: "AIzaSyAtkocbe20ALsG6bGucsObY-mkPWrX17PY",
   authDomain: "healthcare-service-app.firebaseapp.com",

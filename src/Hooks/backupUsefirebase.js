@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  signInWithPopup,
-  GoogleAuthProvider,
   getAuth,
   onAuthStateChanged,
   signOut,
@@ -9,17 +7,11 @@ import {
   signInWithEmailAndPassword,
   sendEmailVerification,
   sendPasswordResetEmail,
-  updateProfile,
-  FacebookAuthProvider,
-  GithubAuthProvider
+  updateProfile
 } from "firebase/auth";
 import initializeAuthentication from '../components/Login/Firebase/Firebase.init';
 
 initializeAuthentication();
-
-const googleProvider = new GoogleAuthProvider();
-const facebookProvider = new FacebookAuthProvider();
-const githubProvider = new GithubAuthProvider();
 
 const useFirebase = () => {
   const [userName, setUserName] = useState('');
@@ -32,38 +24,7 @@ const useFirebase = () => {
 
   const auth = getAuth();
 
-  const signInUsingGoogle = () => {
-    setIsLoading(true);
-    return signInWithPopup(auth, googleProvider)
-      .then(result => {
-        setUser(result.user);
-        setError('');
-      })
-      .catch(error => setError(error.message))
-      .finally(() => setIsLoading(false));
-  };
-
-  const signInUsingFacebook = () => {
-    setIsLoading(true);
-    return signInWithPopup(auth, facebookProvider)
-      .then(result => {
-        setUser(result.user);
-        setError('');
-      })
-      .catch(error => setError(error.message))
-      .finally(() => setIsLoading(false));
-  };
-
-  const signInUsingGithub = () => {
-    setIsLoading(true);
-    return signInWithPopup(auth, githubProvider)
-      .then(result => {
-        setUser(result.user);
-        setError('');
-      })
-      .catch(error => setError(error.message))
-      .finally(() => setIsLoading(false));
-  };
+   
 
   useEffect(() => {
     const unsubscribed = onAuthStateChanged(auth, (currentUser) => {
@@ -169,9 +130,6 @@ const useFirebase = () => {
   };
 
   return {
-    signInUsingGoogle,
-    signInUsingFacebook,
-    signInUsingGithub,
     user,
     setUser,
     isLogin,

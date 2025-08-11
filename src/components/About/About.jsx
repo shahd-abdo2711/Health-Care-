@@ -1,5 +1,5 @@
 import React from "react";
-
+import { FaLinkedin } from "react-icons/fa";
 const About = () => {
   return (
     <div
@@ -32,12 +32,12 @@ const About = () => {
           hospital satisfied, but typical web reviews make hospitals look much
           worse. This negative bias in hospital reviews is a big deal because
           people are walking into their care journey with a negative mindset
-          about the care they are going to get, and that’s not good. The scale
+          about the care they are going to get, and that is not good. The scale
           is just off because of the motivated complainers.
           <br />
           <br />
           Be sure to leave a review on <strong>Health Care</strong> of any
-          hospital you’ve visited, whether you’ve had a negative or a positive
+          hospital you have visited, whether you have had a negative or a positive
           experience. Share your suggestions about writing hospital reviews in
           the comments below or message us on LINKEDIN{" "}
           <a
@@ -45,7 +45,7 @@ const About = () => {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <strong>@Shahd</strong>
+              <FaLinkedin size={20} style={{ marginRight: 6 }} />
           </a>
           .
         </p>

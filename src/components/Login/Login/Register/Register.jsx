@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import GoogleButton from "react-google-button";
 import { Button, Form, Row, Col, Container } from "react-bootstrap";
 import useAuth from "../../../../Hooks/useAuth";
 import UserProfile from "../UserProfile/UserProfile";
-import { FaFacebook, FaGithub } from "react-icons/fa";
 
 const Register = () => {
   const {
     user,
-    singInUsingGoogle,
-    singInUsingFacebook,
-    singInUsingGithub,
     handleConfirmPass,
     handleRegister,
     handleUserName,
@@ -54,16 +49,6 @@ const Register = () => {
 
     setLocalError("");
     handleRegister(e);
-  };
-
-  const handleGoogleSignIn = () => {
-    singInUsingGoogle()
-      .then((result) => {
-        console.log("Google sign in success:", result.user);
-      })
-      .catch((error) => {
-        console.error("Google sign in error:", error.message);
-      });
   };
 
   return (
@@ -163,27 +148,6 @@ const Register = () => {
                   <Link className="body-link-text-style" to="/login">
                     Already have an account? Login
                   </Link>
-                </Button>
-              </div>
-
-              <div className="Login-btns mt-3">
-                <GoogleButton type="dark" onClick={handleGoogleSignIn} />
-              </div>
-
-              <div className="Login-btns mt-3">
-                <Button
-                  onClick={singInUsingFacebook}
-                  style={{ backgroundColor: "#4267B2", border: "none" }}
-                  className="me-2"
-                >
-                  <FaFacebook /> Facebook
-                </Button>
-                <span className="align-self-center mx-2">Or</span>
-                <Button
-                  onClick={singInUsingGithub}
-                  style={{ backgroundColor: "#171515", border: "none" }}
-                >
-                  <FaGithub /> GitHub
                 </Button>
               </div>
             </Form>
