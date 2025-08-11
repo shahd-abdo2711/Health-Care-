@@ -17,47 +17,66 @@ import ServiceDetails from "./components/Services/ServiceDetails/ServiceDetails"
 import PrivateRoute from "./PrivetRoute/PrivetRoute";
 import Contact from "./components/Contact/Contact";
 
+import React, { useState, useEffect } from "react";
+
 function App() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  // تعديل كلاس الـ body حسب الثيم
+  useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add("bg-dark", "text-light");
+      document.body.classList.remove("bg-light", "text-dark");
+    } else {
+      document.body.classList.remove("bg-dark", "text-light");
+      document.body.classList.add("bg-light", "text-dark");
+    }
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
+
   return (
     <Authprovider>
       <BrowserRouter>
-        <Header />
+        <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
 
-        <div className="container my-4">
+        <div className={`container my-4 ${darkMode ? "text-light" : "text-dark"}`}>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/home" element={<Home />} />
+            <Route path="/" element={<Home darkMode={darkMode} />} />
+            <Route path="/home" element={<Home darkMode={darkMode} />} />
 
             <Route
               path="/doctors"
               element={
                 <PrivateRoute>
-                  <Doctors />
+                  <Doctors darkMode={darkMode} />
                 </PrivateRoute>
               }
             />
 
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/about" element={<About darkMode={darkMode} />} />
             <Route path="/profile" element={<Login />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact darkMode={darkMode} />} />
 
             <Route
               path="/appointment"
               element={
                 <PrivateRoute>
-                  <Appointment />
+                  <Appointment darkMode={darkMode} />
                 </PrivateRoute>
               }
             />
 
-            <Route path="/services" element={<Services />} />
+            <Route path="/services" element={<Services darkMode={darkMode} />} />
             <Route
               path="/services/details/:servId"
               element={
                 <PrivateRoute>
-                  <ServiceDetails />
+                  <ServiceDetails darkMode={darkMode} />
                 </PrivateRoute>
               }
             />
@@ -66,7 +85,7 @@ function App() {
           </Routes>
         </div>
 
-        <Footer />
+        <Footer darkMode={darkMode} />
       </BrowserRouter>
     </Authprovider>
   );

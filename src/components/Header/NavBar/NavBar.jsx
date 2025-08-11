@@ -1,10 +1,10 @@
- 
+// src/components/Navbar.jsx
 import React from "react";
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
-import useAuth from "../../../Hooks/useAuth";  
-import "./NavBar.css";
+import { FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
+import useAuth from "../../../Hooks/useAuth"; // تأكد من المسار الصحيح
+import "./Navbar.css";
 
 const pages = [
   { label: "Home", to: "/" },
@@ -13,49 +13,88 @@ const pages = [
   { label: "Contact", to: "/contact" },
 ];
 
-const NavBar = () => {
+const NavBar = ({ darkMode, toggleDarkMode }) => {
   const { user } = useAuth();
 
   return (
-    <Navbar expand="md" bg="light" variant="light" sticky="top" className="shadow-sm">
+    <Navbar
+      expand="md"
+      bg={darkMode ? "dark" : "light"}
+      variant={darkMode ? "dark" : "light"}
+      sticky="top"
+      className="shadow-sm"
+    >
       <Container>
         {/* Logo */}
-        <Navbar.Brand as={Link} to="/" className="fw-bold text-primary">
+        <Navbar.Brand
+          as={Link}
+          to="/"
+          className={`fw-bold ${darkMode ? "text-light" : "text-primary"}`}
+        >
           Health Care
         </Navbar.Brand>
 
-        {/* Mobile Toggle Button */}
-        <Navbar.Toggle aria-controls="main-navbar-nav" />
+        {/* Toggle button for mobile */}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-        {/* Nav Links + User Icon */}
-        <Navbar.Collapse id="main-navbar-nav" className="justify-content-end d-flex align-items-center">
-          <Nav className="me-3">
+        {/* Collapseable nav links */}
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="ms-auto align-items-center">
             {pages.map((page) => (
               <Nav.Link
                 as={Link}
                 key={page.label}
                 to={page.to}
-                className="fw-medium text-dark mx-2"
+                className={`fw-medium mx-2 ${
+                  darkMode ? "text-light" : "text-dark"
+                }`}
               >
                 {page.label}
               </Nav.Link>
             ))}
-          </Nav>
 
-          {user?.email ? (
-            <Link to="/profile" title="User Profile" className="text-dark" style={{ fontSize: "1.5rem" }}>
-              <FaUserCircle />
-            </Link>
-          ) : (
-            <Nav>
-              <Nav.Link as={Link} to="/login" className="fw-medium text-dark mx-2">
-                Login
+            {user?.email ? (
+              <Nav.Link
+                as={Link}
+                to="/profile"
+                title="User Profile"
+                className={darkMode ? "text-light" : "text-dark"}
+              >
+                <FaUserCircle size={24} />
               </Nav.Link>
-              <Nav.Link as={Link} to="/register" className="fw-medium text-dark mx-2">
-                Register
-              </Nav.Link>
-            </Nav>
-          )}
+            ) : (
+              <>
+                <Nav.Link
+                  as={Link}
+                  to="/login"
+                  className={`fw-medium mx-2 ${
+                    darkMode ? "text-light" : "text-dark"
+                  }`}
+                >
+                  Login
+                </Nav.Link>
+                <Nav.Link
+                  as={Link}
+                  to="/register"
+                  className={`fw-medium mx-2 ${
+                    darkMode ? "text-light" : "text-dark"
+                  }`}
+                >
+                  Register
+                </Nav.Link>
+              </>
+            )}
+
+            {/* Dark/Light mode toggle button */}
+            <Button
+              variant={darkMode ? "light" : "dark"}
+              onClick={toggleDarkMode}
+              className="ms-3"
+              aria-label="Toggle dark mode"
+            >
+              {darkMode ? <FaSun /> : <FaMoon />}
+            </Button>
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
