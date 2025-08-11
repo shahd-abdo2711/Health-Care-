@@ -1,0 +1,31 @@
+.doctor-card {
+  transition: 0.5s all ease-in-out;
+  max-width: 345px;
+}
+
+.doctor-card:hover {
+  color: #e91e63;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
+
+.doctor-img {
+  width: 256px;
+  height: 256px;
+  object-fit: cover;
+  transition: 0.5s all ease-in-out;
+}
+
+.doctor-card:hover .doctor-img {
+  transform: scale(1.1);
+}
+
+.check-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.text-style {
+  text-decoration: none;
+  color: inherit;
+}
