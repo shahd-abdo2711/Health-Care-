@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
 import useAuth from "../../../Hooks/useAuth"; // تأكد من المسار الصحيح
-import "./Navbar.css";
+import "./NavBar.css";
 
 const pages = [
   { label: "Home", to: "/" },
