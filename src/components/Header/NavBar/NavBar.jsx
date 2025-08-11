@@ -1,9 +1,9 @@
-// src/components/Navbar.jsx
+ 
 import React from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaUserCircle, FaSun, FaMoon } from "react-icons/fa";
-import useAuth from "../../../Hooks/useAuth"; // تأكد من المسار الصحيح
+import useAuth from "../../../Hooks/useAuth";  
 import "./NavBar.css";
 
 const pages = [

@@ -22,7 +22,7 @@ import React, { useState, useEffect } from "react";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
-  // تعديل كلاس الـ body حسب الثيم
+   
   useEffect(() => {
     if (darkMode) {
       document.body.classList.add("bg-dark", "text-light");
