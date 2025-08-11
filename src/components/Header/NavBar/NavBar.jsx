@@ -4,7 +4,7 @@ import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import useAuth from "../../../Hooks/useAuth";  
-import "./Navbar.css";
+import "./NavBar.css";
 
 const pages = [
   { label: "Home", to: "/" },
